@@ -1,0 +1,21 @@
+<section id="wlPage" class="py-5 container">
+    <div class="row">
+        <div *ngFor="let product of wishLlistProduct "class="col-md-2">
+            <div class="product">
+                <div [routerLink]="['/productDetails', product._id]" class="inner-card container cursor-pointer">
+                    <img class="img-fluid" [src]="product?.imageCover" alt="">
+                    <p class="text-main">{{product?.category?.name}}</p>
+                    <h1 class="h5 fw-bold">{{product?.title?.split(" ")?.slice(0,2)?.join(" ")}}</h1>
+                    <div class="d-flex justify-content-between">
+                        <span>{{product?.price}} EGP</span>
+                        <span><i class="fa-solid fa-star rating-color"></i> {{product?.ratingsAverage}}</span>
+                    </div>
+                </div>
+                <div class="wishIcon w-100 text-end container mt-2">
+                   <i *ngIf="allWishListData.includes($any(product?._id))" (click)="removeProductWishList(product?._id)" class="fa-solid fa-heart text-danger fa-2x cursor-pointer"></i>
+                </div>
+                <button (click)="addProductBtn(product?._id)" class="btn bg-main text-white d-block w-100">Add to cart</button>
+            </div>
+        </div>
+    </div>
+</section>

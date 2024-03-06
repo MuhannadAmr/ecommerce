@@ -1,0 +1,96 @@
+<section id="register" class="py-5">
+    <div class="container py-5">
+        <h3>Login : </h3>
+        <p *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</p>
+        <form (ngSubmit)="loginSubmit()" [formGroup]="loginForm">
+            <div>
+                <label for="email">email</label>
+                <input id="email" type="text" class="form-control" formControlName="email">
+                <div *ngIf="loginForm.get('email')?.errors  && loginForm.get('email')?.touched"
+                    class="alert alert-danger">
+                    <p *ngIf="loginForm.get('email')?.errors?.['required']">email is requird</p>
+                    <p *ngIf="loginForm.get('email')?.errors?.['email']">please enter a valid email</p>
+                </div>
+            </div>
+            <div>
+                <label for="password">passowrd</label>
+                <input id="password" type="text" class="form-control" formControlName="password">
+                <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
+                    class="alert alert-danger">
+                    <p *ngIf="loginForm.get('password')?.errors?.['required']">password is requird</p>
+                    <p *ngIf="loginForm.get('password')?.errors?.['pattern']">password must be over 6 char</p>
+                    <p *ngIf="loginForm.get('password')?.errors?.['pattern']">password must start with a large char</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end gap-3 pt-3">
+                <p class="cursor-pointer text-primary border-bottom border-primary d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgor Password</p>
+                <button [disabled]="loginForm.invalid" type="submit" class="btn bg-main text-white">Login <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i> </button>
+            </div>
+        </form>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Forgor your Password</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- ============== first form============== -->
+
+          
+          <form *ngIf="showForgot" [formGroup]="forgotForm" (ngSubmit)="forgotSubmit()">
+              <p class="text-danger">Forget password</p>
+            <p *ngIf="forgotForm.get('email')?.errors  && forgotForm.get('email')?.touched" class="alert alert-danger">email is required</p>
+            <p *ngIf="forgotErrorMessage" class="alert alert-danger">{{forgotErrorMessage}}</p>
+            <label>email</label>
+            <input type="text" class="form-control" formControlName="email">
+            <button [disabled]="forgotForm.invalid"  type="submit" class="btn bg-main text-white d-block ms-auto mt-3">Forgot password <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i> </button>
+          </form>
+
+          <!-- ==============second form============== -->
+          <form *ngIf="showVerify" [formGroup]="verifyForm" (ngSubmit)="verifySubmit()">
+                <p class="text-danger">Verify Code</p>
+                <p *ngIf="verifyForm.get('resetCode')?.errors && verifyForm.get('resetCode')?.touched" class="alert alert-danger">verify code is required</p>
+                <p *ngIf="verifyErrorMessage" class="alert alert-danger">{{verifyErrorMessage}}</p>
+                <label >resetCode</label>
+                <input type="text" formControlName="resetCode" class="form-control">
+                <button [disabled]="verifyForm.invalid"  type="submit" class="btn bg-main text-white d-block ms-auto mt-3">Verify <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i> </button>
+         
+            </form>
+          <!-- ==============third form=============== -->
+          <form *ngIf="showNewPassword" [formGroup]="newPasswordForm" (ngSubmit)="newPasswordSubmit()">
+                <p class="text-danger">New Password</p>
+                <p *ngIf="newPasswordErrorMessage" class="alert alert-danger">{{newPasswordErrorMessage}}</p>
+                <div>
+                    <label for="email">email</label>
+                    <input id="email" type="text" class="form-control" formControlName="email">
+                    <div *ngIf="newPasswordForm.get('email')?.errors  && newPasswordForm.get('email')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="newPasswordForm.get('email')?.errors?.['required']">email is requird</p>
+                        <p *ngIf="newPasswordForm.get('email')?.errors?.['email']">please enter a valid email</p>
+                    </div>
+                </div>
+                <div>
+                    <label>passowrd</label>
+                    <input  type="text" class="form-control" formControlName="newPassword">
+                    <div *ngIf="newPasswordForm.get('newPassword')?.errors && newPasswordForm.get('newPassword')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="newPasswordForm.get('newPassword')?.errors?.['required']">new password is requird</p>
+                        <p *ngIf="newPasswordForm.get('newPassword')?.errors?.['pattern']">new password must be over 6 char</p>
+                        <p *ngIf="newPasswordForm.get('newPassword')?.errors?.['pattern']">new password must start with a large char</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end gap-3 pt-3">
+                    <button [disabled]="newPasswordForm.invalid" type="submit" class="btn bg-main text-white">set new password <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i> </button>
+                </div>
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+</section>

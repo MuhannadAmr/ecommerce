@@ -1,0 +1,31 @@
+<section id="pay" class="py-5">
+    <div class="py-5 w-75 mx-auto">
+        <form [formGroup]="detailsForm" (ngSubmit)="paySubmit()">
+            <label for="details" class="py-2">Details</label>
+            <input id="details" type="text" class="form-control" formControlName="details" placeholder="details">
+
+            <label for="phone" class="py-2">Phone</label>
+            <input id="phone" type="text" class="form-control" formControlName="phone" placeholder="phone">
+
+            <label for="city" class="py-2">City</label>
+            <input id="city" type="text" class="form-control" formControlName="city" placeholder="city">
+
+               <div class="py-4 text-center w-100">
+                <button type="submit" [disabled]="detailsForm.invalid" class="btn btn-success px-5"  data-bs-toggle="modal" data-bs-target="#exampleModal" >Pay Now</button>
+               </div>
+        </form>
+    </div>
+
+  <!-- Modal -->
+  <div class="modal fade py-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <div class="modal-body d-flex justify-content-around">
+          <button (click)="payCash()" class="btn btn-info">Pay Cash</button>
+          <button (click)="payVisa()" class="btn btn-info">Pay visa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

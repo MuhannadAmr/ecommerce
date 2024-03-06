@@ -1,0 +1,47 @@
+<section id="cart" class="py-5 container">
+    <div class="fotter-cart text-center py-4">
+        <p class="h3 text-main">Total Price : {{totalPrice}}</p>
+        <div class="towBtn w-100 pt-4">
+            <!-- <button *ngIf="cartItemFlag" class="btn btn-outline-danger" (click)="deleteAllOreders()">clear all products</button> -->
+            <button [routerLink]="['/pay',cartId]" *ngIf="cartItemFlag" class="btn btn-success d-block ms-auto">complete your order</button>
+        </div>
+        <img *ngIf="!cartItemFlag" class="w-50 mx-auto" src="../../assets/images/preview.png" alt="">
+        <p *ngIf="!cartItemFlag" class="h4">Your cart is empty</p>
+        <p *ngIf="!cartItemFlag" class="">Looks like you have not added anything to your cart, Go ahead & explore top categories</p>
+        <button *ngIf="!cartItemFlag" routerLink="/home" class="btn btn-primary">Shop our products</button>
+    </div>
+    <!-- ===================================================== -->
+    <div *ngFor="let oneProduct of allCartProducts" class="row align-items-center bg-light ss">
+        <div class="col-md-4">
+            <img [src]="oneProduct?.product?.imageCover" class="w-50 " alt="">
+            <h1 class="h4 text-center py-3">{{oneProduct?.product?.title}}</h1>
+            <p class="me-4 text-center"> Price : {{oneProduct?.price}}EGP</p>
+        </div>
+        <div class="col-md-4 text-end">
+            
+            <div class="qua d-flex justify-content-end">
+                <i (click)="changeItemQuBTN('minus' , oneProduct?.count , oneProduct?.product?._id )" class="fa-solid fa-circle-minus fa-2x text-main cursor-pointer"></i>
+                <p class="px-3 h3">{{oneProduct?.count}}</p>
+                <i (click)="changeItemQuBTN('plus' , oneProduct?.count , oneProduct?.product?._id )" class="fa-solid fa-circle-plus fa-2x text-main cursor-pointer"></i>
+            </div>
+        </div>
+        <div class="col-md-4 text-danger text-end cursor-pointer">
+            <i (click)="deleteItem(oneProduct?.product?._id)" class="fa-solid fa-trash fa-2x"></i>
+        </div>
+    </div>
+    <!-- ============================================================================ -->
+    <div class="w-100 text-center pt-5">
+        <button *ngIf="cartItemFlag" class="btn btn-outline-danger" (click)="deleteAllOreders()">clear all products</button>
+    </div>
+    <!-- <div class="fotter-cart text-center py-4">
+        <p class="h3 text-main">Total Price : {{totalPrice}}</p>
+        <div class="towBtn w-50 mx-auto d-flex justify-content-around pt-4">
+            <button *ngIf="cartItemFlag" class="btn btn-outline-danger" (click)="deleteAllOreders()">clear all products</button>
+            <button *ngIf="cartItemFlag" class="btn btn-success">complete your order</button>
+        </div>
+        <img *ngIf="!cartItemFlag" class="w-50 mx-auto" src="../../assets/images/preview.png" alt="">
+        <p *ngIf="!cartItemFlag" class="h4">Your cart is empty</p>
+        <p *ngIf="!cartItemFlag" class="">Looks like you have not added anything to your cart, Go ahead & explore top categories</p>
+        <button *ngIf="!cartItemFlag" routerLink="/home" class="btn btn-primary">Shop our products</button>
+    </div> -->
+</section>

@@ -1,0 +1,23 @@
+<section id="allOrders" class="py-5">
+    <div class="container">
+        <div class="row column-gap-5 row-gap-3">
+            <div *ngFor="let oneOrder of allUserOrders" class="col-md-5 bg-light mb-3 pt-3">
+                <div class="inner">
+                    <div class="d-flex justify-content-between align-items-center container">
+                        <p class="px-2 py-1 bg-info">order id : {{oneOrder?.id}}</p>
+                        <p>{{oneOrder?.createdAt?.split("T").slice(0,1)}}</p>
+                    </div>
+                    <div class="container border-bottom">
+                        <p class="solid">{{oneOrder?.cartItems?.length}} Products</p>
+                        <p *ngIf="oneOrder?.isDelivered" class="text-main">Delivered</p>
+                        <p *ngIf="!oneOrder?.isDelivered" class="text-danger">Not delivered</p>
+                    </div>
+                    <div class="container d-flex justify-content-between align-items-end">
+                        <p class="text-main pt-2">total price: {{oneOrder?.totalOrderPrice}}</p>
+                        <p>Payment type: {{oneOrder?.paymentMethodType}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
