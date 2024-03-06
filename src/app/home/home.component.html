@@ -13,10 +13,13 @@
 
                 </owl-carousel-o> -->
                 <owl-carousel-o [options]="customOptionsN">
-                    <ng-template carouselSlide><img height="400" class="w-100" src="../../assets/images/slider-image-1.jpeg" alt=""></ng-template>  
-                    <ng-template carouselSlide><img height="400" class="w-100" src="../../assets/images/slider-image-2.jpeg" alt=""></ng-template>  
-                    <ng-template carouselSlide><img height="400" class="w-100" src="../../assets/images/slider-image-3.jpeg" alt=""></ng-template>  
-                  </owl-carousel-o>
+                    <ng-template carouselSlide><img height="400" class="w-100" src="./assets/images/slider-image-1.jpeg"
+                            alt=""></ng-template>
+                    <ng-template carouselSlide><img height="400" class="w-100" src="./assets/images/slider-image-2.jpeg"
+                            alt=""></ng-template>
+                    <ng-template carouselSlide><img height="400" class="w-100" src="./assets/images/slider-image-3.jpeg"
+                            alt=""></ng-template>
+                </owl-carousel-o>
 
             </div>
             <div class="col-md-3">
@@ -28,12 +31,12 @@
             <owl-carousel-o [options]="customOptions">
 
                 <ng-container *ngFor="let cat of allCategoriesData">
-                  <ng-template carouselSlide>
-                    <img [src]="cat?.image" class="w-100" height="300">
-                  </ng-template>
+                    <ng-template carouselSlide>
+                        <img [src]="cat?.image" class="w-100" height="300">
+                    </ng-template>
                 </ng-container>
-            
-              </owl-carousel-o>
+
+            </owl-carousel-o>
         </div>
         <!-- all product -->
         <input type="text" [(ngModel)]="userWord" class="form-control w-75 mx-auto my-5 shadow-sm" placeholder="Search">
@@ -51,10 +54,15 @@
                         </div>
                     </div>
                     <div class="wishIcon w-100 text-end container mt-2">
-                        <i *ngIf="!allWishListData.includes($any(product?._id))" (click)="addProductWishList(product?._id)" class="fa-regular fa-heart fa-2x cursor-pointer"></i>
-                        <i *ngIf="allWishListData.includes($any(product?._id))" (click)="removeProductWishList(product?._id)" class="fa-solid fa-heart text-danger fa-2x cursor-pointer"></i>
+                        <i *ngIf="!allWishListData.includes($any(product?._id))"
+                            (click)="addProductWishList(product?._id)"
+                            class="fa-regular fa-heart fa-2x cursor-pointer"></i>
+                        <i *ngIf="allWishListData.includes($any(product?._id))"
+                            (click)="removeProductWishList(product?._id)"
+                            class="fa-solid fa-heart text-danger fa-2x cursor-pointer"></i>
                     </div>
-                    <button (click)="addProductBtn(product?._id)" class="btn bg-main text-white d-block w-100">Add to cart</button>
+                    <button (click)="addProductBtn(product?._id)" class="btn bg-main text-white d-block w-100">Add to
+                        cart</button>
                 </div>
             </div>
         </div>

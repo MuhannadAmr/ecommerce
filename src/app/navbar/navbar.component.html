@@ -43,10 +43,21 @@
                 </div>
             </div>
             <div class="buttons d-flex justify-content-center gap-3">
-                <a *ngIf="!isLogin" class="nav-link" routerLink="login">Login</a>
-                <a *ngIf="!isLogin" class="nav-link" routerLink="register">Register</a>
-                <a *ngIf="isLogin" (click)="lououtMethod()" class="nav-link cursor-pointer">Logout</a>
-                <a *ngIf="isLogin" class="nav-link cursor-pointer" routerLink="setting">Setting</a>
+                <!-- <a *ngIf="!isLogin" class="nav-link" routerLink="login">Login</a> -->
+                <!-- <a *ngIf="!isLogin" class="nav-link" routerLink="register">Register</a> -->
+                <!-- <a *ngIf="isLogin" (click)="lououtMethod()" class="nav-link cursor-pointer">Logout</a> -->
+                <!-- <a *ngIf="isLogin" class="nav-link cursor-pointer" routerLink="setting">Setting</a> -->
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin" (click)="lououtMethod()" class="nav-link cursor-pointer">Logout</a>
+                  </li>
+                  <li>
+                    <a *ngIf="!isLogin" class="nav-link" routerLink="login">Login</a>
+                  </li>
+                  <li>
+                    <a *ngIf="!isLogin" class="nav-link" routerLink="register">Register</a>
+                  </li>
+                </ul>
             </div>
         </div>
       </div>
