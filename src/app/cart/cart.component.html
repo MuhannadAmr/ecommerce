@@ -5,7 +5,7 @@
             <!-- <button *ngIf="cartItemFlag" class="btn btn-outline-danger" (click)="deleteAllOreders()">clear all products</button> -->
             <button [routerLink]="['/pay',cartId]" *ngIf="cartItemFlag" class="btn btn-success d-block ms-auto">complete your order</button>
         </div>
-        <img *ngIf="!cartItemFlag" class="w-50 mx-auto" src="../../assets/images/preview.png" alt="">
+        <img *ngIf="!cartItemFlag" class="w-50 mx-auto" src="./assets/images/preview.png" alt="">
         <p *ngIf="!cartItemFlag" class="h4">Your cart is empty</p>
         <p *ngIf="!cartItemFlag" class="">Looks like you have not added anything to your cart, Go ahead & explore top categories</p>
         <button *ngIf="!cartItemFlag" routerLink="/home" class="btn btn-primary">Shop our products</button>
