@@ -20,6 +20,11 @@ export class HomeComponent implements OnInit {
   userWord: string = "";
   allWishListData: string[] = [];
   allCategoriesData:any[]=[];
+  // for pagenate
+  pageSize: number = 0;
+  p: number = 1;
+  total: number = 0;
+
   constructor(
     private _WhishlistService: WhishlistService,
     private _ProductsService: ProductsService,
@@ -30,7 +35,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this._ProductsService.getProducts().subscribe((res) => {
-      this.allProduct = res.data
+      this.allProduct = res.data;
+      this.pageSize = res.metadata.limit;
+      this.p = res.metadata.currentPage;
+      this.total = res.results;
     });
     this._CartService.getAllProductCartAPI().subscribe((res) => {
       this._CartService.cartNum.next(res.numOfCartItems)
@@ -56,6 +64,16 @@ export class HomeComponent implements OnInit {
       }
     })
   }
+
+  pageChanged(event:any):void{
+    this._ProductsService.getProducts(event).subscribe((res)=>{
+      this.allProduct = res.data;
+      this.pageSize = res.metadata.limit;
+      this.p = res.metadata.currentPage;
+      this.total = res.results;
+    })
+  }
+
   addProductBtn(pId: any) {
     this._CartService.addProductToCartAPI(pId).subscribe({
       next: (res) => {

@@ -1,19 +1,32 @@
-.inner{
+.inner {
     border: 1px solid #0aad0a;
     padding: 10px;
     border-radius: 5px;
-    
+
 }
-section{
+
+section {
     width: 95%;
     margin: auto;
 }
-.inner{
+
+.inner {
     overflow: hidden;
 }
-.show img{
+
+.cardS img {
     transition: all 0.4s;
 }
-.show :hover img{
+
+.cardS :hover img {
     transform: scale(1.1);
+}
+
+.cardS .carD:hover {
+    transition: all 0.3s;
+}
+
+.cardS:hover > .carD:not(:hover){
+    filter: blur(3px);
+    transform: scale(0.9, 0.9);
 }

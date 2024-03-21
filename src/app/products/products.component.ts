@@ -16,20 +16,29 @@ export class ProductsComponent {
   allProduct!: Data[];
   userWord: string = "";
   allWishListData: string[] = [];
-  allCategoriesData:any[]=[];
+  allCategoriesData: any[] = [];
+// for pagenate
+  pageSize: number = 0;
+  p: number = 1;
+  total: number = 0;
 
   constructor(
     private _WhishlistService: WhishlistService,
     private _ProductsService: ProductsService,
     private _CartService: CartService,
     private toastEvokeService: ToastEvokeService,
-    private _CategoriesService:CategoriesService
-  ){}
+    private _CategoriesService: CategoriesService
+  ) { }
 
   ngOnInit(): void {
+
     this._ProductsService.getProducts().subscribe((res) => {
-      this.allProduct = res.data
+      this.allProduct = res.data;
+      this.pageSize = res.metadata.limit;
+      this.p = res.metadata.currentPage;
+      this.total = res.results;
     });
+
     this._CartService.getAllProductCartAPI().subscribe((res) => {
       this._CartService.cartNum.next(res.numOfCartItems)
     })
@@ -45,15 +54,25 @@ export class ProductsComponent {
       }
     })
     this._CategoriesService.getAllCategories().subscribe({
-      next:(res)=>{
+      next: (res) => {
         this.allCategoriesData = res.data;
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
-        
+
       }
     })
   }
+
+  pageChanged(event:any):void{
+    this._ProductsService.getProducts(event).subscribe((res)=>{
+      this.allProduct = res.data;
+      this.pageSize = res.metadata.limit;
+      this.p = res.metadata.currentPage;
+      this.total = res.results;
+    })
+  }
+
   addProductBtn(pId: any) {
     this._CartService.addProductToCartAPI(pId).subscribe({
       next: (res) => {
@@ -69,7 +88,7 @@ export class ProductsComponent {
     this._WhishlistService.addProductToWlAPI(pId).subscribe({
       next: (res) => {
         this._WhishlistService.wishNum.next(res.data.length);
-        
+
         this.allWishListData = res.data;
         this.toastEvokeService.success(res.status, res.message).subscribe();
       },

@@ -32,6 +32,7 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { WhishListComponent } from './whish-list/whish-list.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LoadingInterceptor } from './loading.interceptor';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { LoadingInterceptor } from './loading.interceptor';
         ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
         ToastNotificationConfigModule.forRoot(), // Needed for instantiating toast notifications.
         NgxSpinnerModule,
+        NgxPaginationModule,
         
   ],
   providers: [

@@ -31,7 +31,7 @@ export class PayOrderComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.toastEvokeService.success(`${res.status} !`, `Your total price : ${res.data.totalOrderPrice}`).subscribe();
-         window.location.href = `${location.origin}/home`
+         window.location.href = `${location.origin}/ecommerce/home`
       },
       error: (err) => {
         console.log(err);

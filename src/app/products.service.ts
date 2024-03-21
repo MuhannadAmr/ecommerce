@@ -9,8 +9,8 @@ export class ProductsService {
   baseURL:string ="https://ecommerce.routemisr.com";
   constructor(private _HttpClient:HttpClient) { }
 
-  getProducts():Observable<any>{
-    return this._HttpClient.get(`${this.baseURL}/api/v1/products`);
+  getProducts(pageNum:number = 1):Observable<any>{
+    return this._HttpClient.get(`${this.baseURL}/api/v1/products?page=${pageNum}&limit=20`);
   }
   getSpecProduct(id:string):Observable<any>{
     return this._HttpClient.get(`${this.baseURL}/api/v1/products/${id}`)

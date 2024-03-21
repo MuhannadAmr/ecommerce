@@ -1,10 +1,13 @@
 <section id="home" class="py-5">
     <div class="container">
-        <!-- all product -->
+        <!-- search for products -->
         <input type="text" [(ngModel)]="userWord" class="form-control w-75 mx-auto my-5 shadow-sm" placeholder="Search">
-
-        <div class="row">
-            <div *ngFor="let product of allProduct | search:userWord" class="col-md-2">
+        <!-- all product -->
+        <div class="row justify-content-center">
+            <div *ngFor="let product of allProduct | search:userWord | paginate: { id: 'productPagenate',
+            itemsPerPage: pageSize,
+            currentPage: p,
+            totalItems: total }" class="col-md-2">
                 <div class="product">
                     <div [routerLink]="['/productDetails', product._id]" class="inner-card container cursor-pointer">
                         <img class="img-fluid" [src]="product?.imageCover" alt="">
@@ -16,12 +19,25 @@
                         </div>
                     </div>
                     <div class="wishIcon w-100 text-end container mt-2">
-                        <i *ngIf="!allWishListData.includes($any(product?._id))" (click)="addProductWishList(product?._id)" class="fa-regular fa-heart fa-2x cursor-pointer"></i>
-                        <i *ngIf="allWishListData.includes($any(product?._id))" (click)="removeProductWishList(product?._id)" class="fa-solid fa-heart text-danger fa-2x cursor-pointer"></i>
+                        <i *ngIf="!allWishListData.includes($any(product?._id))"
+                            (click)="addProductWishList(product?._id)"
+                            class="fa-regular fa-heart fa-2x cursor-pointer"></i>
+                        <i *ngIf="allWishListData.includes($any(product?._id))"
+                            (click)="removeProductWishList(product?._id)"
+                            class="fa-solid fa-heart text-danger fa-2x cursor-pointer"></i>
                     </div>
-                    <button (click)="addProductBtn(product?._id)" class="btn bg-main text-white d-block w-100">Add to cart</button>
+                    <button (click)="addProductBtn(product?._id)" class="btn bg-main text-white d-block w-100">Add to
+                        cart</button>
                 </div>
             </div>
+        </div>
+        <!-- pagenate -->
+        <div class="d-flex justify-content-center mt-5">
+            <pagination-controls id="productPagenate" (pageChange)="pageChanged($event)"
+                (pageBoundsCorrection)="pageChanged($event)" [maxSize]="9" [directionLinks]="true" [autoHide]="true"
+                [responsive]="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+            </pagination-controls>
         </div>
     </div>
 </section>
